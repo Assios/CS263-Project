@@ -1,4 +1,6 @@
 /home/assios/workspace/project/src/main/java/project/project/SignGuestbookServlet.java
+/home/assios/workspace/project/src/main/java/project/project/Worker.java
+/home/assios/workspace/project/src/main/java/project/project/Enqueue.java
 /home/assios/workspace/project/src/main/java/project/project/GuestbookServlet.java
 /home/assios/workspace/project/src/main/java/project/project/TestJerseyWS.java
 /home/assios/workspace/project/src/main/java/com/google/appengine/demos/guestbook/GuestbookServlet.java
