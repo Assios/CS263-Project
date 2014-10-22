@@ -19,12 +19,11 @@ public class Worker extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String key = request.getParameter("key");
+        String value = request.getParameter("value");
         // Do something with key.
-        
-        //String guestbookName = req.getParameter("guestbookName");
-        Key taskKey = KeyFactory.createKey("Task", key);
         Date date = new Date();
-        Entity task = new Entity("Task", taskKey);
+        Entity task = new Entity("TaskData", key);
+        task.setProperty("value", value);
         task.setProperty("date", date);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

@@ -33,6 +33,16 @@
         <servlet-name>worker</servlet-name>
         <url-pattern>/worker</url-pattern>
     </servlet-mapping>		
+
+    <servlet>
+        <servlet-name>readData</servlet-name>
+        <servlet-class>project.project.ReadData</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>readData</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
     
 	<servlet>
 	    <servlet-name>Jersey Web Application</servlet-name>
