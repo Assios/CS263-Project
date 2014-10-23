@@ -33,7 +33,7 @@
 
 %>
 
-<p>Key:<br>${fn:escapeXml(key)}<br>Value:</p>
+<p>Key:<br><br>${fn:escapeXml(key)}<br>Value:</p>
 <%= ent.getProperty("value") %>
 
 </body>
