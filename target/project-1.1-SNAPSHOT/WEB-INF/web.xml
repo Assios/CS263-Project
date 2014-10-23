@@ -35,6 +35,26 @@
     </servlet-mapping>		
 
     <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>project.project.Upload</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>	
+
+    <servlet>
+        <servlet-name>Serve</servlet-name>
+        <servlet-class>project.project.Serve</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Serve</servlet-name>
+        <url-pattern>/serve</url-pattern>
+    </servlet-mapping>	
+
+    <servlet>
         <servlet-name>readData</servlet-name>
         <servlet-class>project.project.ReadData</servlet-class>
     </servlet>
