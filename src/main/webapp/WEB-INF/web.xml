@@ -5,71 +5,19 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
-        <servlet-name>sign</servlet-name>
-        <servlet-class>project.project.SignGuestbookServlet</servlet-class>
+        <servlet-name>test</servlet-name>
+        <servlet-class>cs263.TestServlet</servlet-class>
     </servlet>
-    
     <servlet-mapping>
-        <servlet-name>sign</servlet-name>
-        <url-pattern>/sign</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>enqueue</servlet-name>
-        <servlet-class>project.project.Enqueue</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>enqueue</servlet-name>
-        <url-pattern>/enqueue</url-pattern>
-    </servlet-mapping>	
-    
-    <servlet>
-        <servlet-name>worker</servlet-name>
-        <servlet-class>project.project.Worker</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>worker</servlet-name>
-        <url-pattern>/worker</url-pattern>
-    </servlet-mapping>		
-
-    <servlet>
-        <servlet-name>Upload</servlet-name>
-        <servlet-class>project.project.Upload</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>Upload</servlet-name>
-        <url-pattern>/upload</url-pattern>
-    </servlet-mapping>	
-
-    <servlet>
-        <servlet-name>Serve</servlet-name>
-        <servlet-class>project.project.Serve</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>Serve</servlet-name>
-        <url-pattern>/serve</url-pattern>
-    </servlet-mapping>	
-
-    <servlet>
-        <servlet-name>readData</servlet-name>
-        <servlet-class>project.project.ReadData</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>readData</servlet-name>
+        <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
-    
 	<servlet>
 	    <servlet-name>Jersey Web Application</servlet-name>
 	    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 	    <init-param>
 	        <param-name>jersey.config.server.provider.packages</param-name>
-	        <param-value>project.project</param-value>
+	        <param-value>cs263</param-value>
 	    </init-param>
 	    <init-param>
 	        <!-- speed up initial Jersey loading by deactivating WADL -->
@@ -84,6 +32,7 @@
 	</servlet-mapping>
     
     <welcome-file-list>
-        <welcome-file>guestbook.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+   
 </web-app>

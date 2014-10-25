@@ -3,10 +3,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
-    <groupId>project</groupId>
-    <artifactId>project</artifactId>
+    <groupId>CS263</groupId>
+    <artifactId>CS263</artifactId>
 
     <properties>
         <appengine.app.version>1</appengine.app.version>
@@ -19,6 +19,7 @@
 
     <dependencies>
         <!-- Compile/runtime dependencies -->
+	<!-- Jersey -->
 		<dependency>
 		    <groupId>org.glassfish.jersey.containers</groupId>
 		    <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
