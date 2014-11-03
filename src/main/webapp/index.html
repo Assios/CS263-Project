@@ -30,7 +30,12 @@
       <div class="jumbotron">
         <h1>NewsHub</h1>
         <p class="lead">NewsHub is your personalized newspaper.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        <p>
+          <form action="/enqueue" method="post">
+            <input type="text" name="movie">
+            <input type="submit">
+          </form>
+        </p>
       </div>
 
       <div class="row marketing">
