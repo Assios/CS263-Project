@@ -34,6 +34,11 @@ public class Enqueue extends HttpServlet {
         
         // Add the task to the default queue.
         Queue queue = QueueFactory.getDefaultQueue();
+        
+        queue.add(withUrl("/worker").param("json", json_data));
+
+        response.sendRedirect("/");
+
     }
     
 }

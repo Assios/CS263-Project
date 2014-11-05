@@ -24,6 +24,16 @@
         <url-pattern>/enqueue</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>worker</servlet-name>
+        <servlet-class>cs263.Worker</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>worker</servlet-name>
+        <url-pattern>/worker</url-pattern>
+    </servlet-mapping>
+    
 	<servlet>
 	    <servlet-name>Jersey Web Application</servlet-name>
 	    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
