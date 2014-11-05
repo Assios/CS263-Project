@@ -20,14 +20,17 @@ public class Enqueue extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String movie = JsonReader.swap(request.getParameter("movie"));
-
+        String json_data = null;
+        
         //Fetch data from website
         try {
-			System.out.println(JsonReader.readUrl("http://www.omdbapi.com/?s=" + movie));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			json_data = JsonReader.readUrl("http://www.omdbapi.com/?s=" + movie);
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
+        
+        System.out.println(json_data);
+
         
         // Add the task to the default queue.
         Queue queue = QueueFactory.getDefaultQueue();

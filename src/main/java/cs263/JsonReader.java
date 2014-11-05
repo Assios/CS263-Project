@@ -13,7 +13,7 @@ public class JsonReader {
 		String returnString = "";
 		
 		for (int i = 0; i < array.length; i++) {
-			if (array[i].contains(" ")) {
+			if (array[i].equals(" ")) {
 				array[i] = "%20";
 			}
 			returnString += array[i];
