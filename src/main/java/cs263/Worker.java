@@ -22,7 +22,7 @@ public class Worker extends HttpServlet {
         
         //TODO Convert json_data to GSON object
 
-        Key movieKey = KeyFactory.createKey("Guestbook", json_data);
+        Key movieKey = KeyFactory.createKey("Movie", json_data);
         Entity task = new Entity("MovieInfo", movieKey);
         task.setProperty("json", json_data);
 
