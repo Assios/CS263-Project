@@ -21,6 +21,11 @@
         <!-- Compile/runtime dependencies -->
 	<!-- Jersey -->
 		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+  		</dependency>
+		<dependency>
 		    <groupId>org.glassfish.jersey.containers</groupId>
 		    <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
 		    <artifactId>jersey-container-servlet-core</artifactId>
