@@ -41,7 +41,8 @@ public class ReadData extends HttpServlet {
     		String title = (String) result.getProperty("title");
     		String rating = (String) result.getProperty("rating");
     		String year = (String) result.getProperty("year");
-    		write.print("<p>" + title + " from " + year + " has a score of " + rating + " on IMDB.</p>");
+    		String poster = (String) result.getProperty("poster");
+    		write.print("<p><a href=\"" + poster + "\">" + title + "</a> from " + year + " has a score of " + rating + " on IMDB.</p>");
 
     	}
     }
