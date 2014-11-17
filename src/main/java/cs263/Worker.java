@@ -24,10 +24,13 @@ public class Worker extends HttpServlet {
         String genre = request.getParameter("genre");
         String plot = request.getParameter("plot");
         String rating = request.getParameter("rating");
+        String poster_url = request.getParameter("poster");
+        		
         System.out.println(title);
         System.out.println(year);
         System.out.println(director);
         System.out.println(rating);
+        System.out.println(poster_url);
         
         //TODO Convert json_data to GSON object
 
@@ -39,6 +42,7 @@ public class Worker extends HttpServlet {
         movie.setProperty("genre", genre);
         movie.setProperty("plot", plot);
         movie.setProperty("rating", rating);
+        movie.setProperty("poster", poster_url);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(movie);

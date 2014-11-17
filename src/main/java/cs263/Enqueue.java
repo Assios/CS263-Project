@@ -30,6 +30,7 @@ public class Enqueue extends HttpServlet {
     String director = null;
     String plot = null;
     String rating = null;
+    String poster = null;
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,7 +54,7 @@ public class Enqueue extends HttpServlet {
         if (movie_info.get("Response").equals("True")) {
         	getMovieInfo(movie_info);
 	        Queue queue = QueueFactory.getDefaultQueue();     
-	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating));
+	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster));
 	        response.sendRedirect("/");
         }
         else
@@ -67,6 +68,7 @@ public class Enqueue extends HttpServlet {
     	this.genre = map.get("Genre");
     	this.plot = map.get("Plot");
     	this.rating = map.get("imdbRating");
+    	this.poster = map.get("Poster");
     }
     
 }
