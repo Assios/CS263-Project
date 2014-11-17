@@ -25,17 +25,13 @@ public class Worker extends HttpServlet {
         String plot = request.getParameter("plot");
         String rating = request.getParameter("rating");
         String poster_url = request.getParameter("poster");
-        		
-        System.out.println(title);
-        System.out.println(year);
-        System.out.println(director);
-        System.out.println(rating);
-        System.out.println(poster_url);
+  
         
-        //TODO Convert json_data to GSON object
+        Date date = new Date();
 
         Key movieKey = KeyFactory.createKey("Movie", title);
-        Entity movie = new Entity("Movies", movieKey);
+        Entity movie = new Entity("Movie", movieKey);
+        movie.setProperty("date", date);
         movie.setProperty("title", title);
         movie.setProperty("year", year);
         movie.setProperty("director", director);
