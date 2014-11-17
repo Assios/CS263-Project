@@ -23,6 +23,14 @@ import com.google.gson.Gson;
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
 
 public class Enqueue extends HttpServlet {
+    //Fields for movie info
+    String title = null;
+    String year = null;
+    String genre = null;
+    String director = null;
+    String plot = null;
+    String rating = null;
+	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String movie = JsonReader.swap(request.getParameter("movie"));
@@ -30,29 +38,34 @@ public class Enqueue extends HttpServlet {
         
         //Fetch data from website
         try {
-			json_data = JsonReader.readUrl("http://www.omdbapi.com/?s=" + movie);
+			json_data = JsonReader.readUrl("http://www.omdbapi.com/?t=" + movie);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
         
         //CONVERT TO GSON
-    	Gson gson = new Gson(); 
+    	Gson gson = new Gson();     	
+    	HashMap<String,String> movie_info = new Gson().fromJson(json_data, new TypeToken<HashMap<String, String>>(){}.getType());
     	
-    	HashMap<String,String> map = new Gson().fromJson(json_data, new TypeToken<HashMap<String, String>>(){}.getType());
-
-        System.out.println(map.get("Response"));
-		
-        System.out.println("STRING");
-        System.out.println(json_data);
-
+        System.out.println(movie_info.get("Title"));
         
-        // Add the task to the default queue.
-        Queue queue = QueueFactory.getDefaultQueue();
-        
-        queue.add(withUrl("/worker").param("json", json_data));
+        // Add the task to the default queue.        
+        if (movie_info.get("Response") == "True") {
+        	getMovieInfo(movie_info);
+	        Queue queue = QueueFactory.getDefaultQueue();     
+	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating));
+	        response.sendRedirect("/");
+        }
 
-        response.sendRedirect("/");
-
+    }
+    
+    private void getMovieInfo(HashMap<String,String> map) {
+    	this.title = map.get("Title");
+    	this.year = map.get("Year");
+    	this.director = map.get("Director");
+    	this.genre = map.get("Genre");
+    	this.plot = map.get("Plot");
+    	this.rating = map.get("imdbRating");
     }
     
 }
