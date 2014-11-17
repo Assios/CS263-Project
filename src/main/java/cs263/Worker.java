@@ -18,15 +18,29 @@ import com.google.appengine.api.datastore.KeyFactory;
 public class Worker extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String json_data = request.getParameter("json");
+        String title = request.getParameter("title");
+        String year = request.getParameter("year");
+        String director = request.getParameter("director");
+        String genre = request.getParameter("genre");
+        String plot = request.getParameter("plot");
+        String rating = request.getParameter("rating");
+        System.out.println(title);
+        System.out.println(year);
+        System.out.println(director);
+        System.out.println(rating);
         
         //TODO Convert json_data to GSON object
 
-        Key movieKey = KeyFactory.createKey("Movie", json_data);
-        Entity task = new Entity("MovieInfo", movieKey);
-        task.setProperty("json", json_data);
+        Key movieKey = KeyFactory.createKey("Movie", title);
+        Entity movie = new Entity("Movies", movieKey);
+        movie.setProperty("title", title);
+        movie.setProperty("year", year);
+        movie.setProperty("director", director);
+        movie.setProperty("genre", genre);
+        movie.setProperty("plot", plot);
+        movie.setProperty("rating", rating);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(task);
+        datastore.put(movie);
     }
 }
