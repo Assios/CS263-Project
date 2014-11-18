@@ -31,14 +31,15 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li class="active"><a href="/filter">Filter movies</a></li>
-          <li class="active"><a href="#">About</a></li>
+          <li class="active"><a href="/">Home</a></li>
+          <li class="active"><a href="/list.jsp">Movie list</a></li>
+          <li class="active"><a href="/filter.jsp">Filter movies</a></li>
+          <li class="active"><a href="/about.html">About</a></li>
         </ul>
         <h3 class="text-muted">Movies</h3>
       </div>
 
-      <h2>List of movies:</h2>
+      <h2>List of movies searched for by users:</h2>
 <%      
       DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
       

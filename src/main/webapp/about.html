@@ -21,7 +21,7 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
           <li class="active"><a href="/list.jsp">Movie list</a></li>
           <li class="active"><a href="/filter.jsp">Filter movies</a></li>
           <li class="active"><a href="/about.html">About</a></li>
@@ -30,13 +30,10 @@
       </div>
 
       <div class="jumbotron">
-        <h1>Movies</h1>
-        <p class="lead">Here you can add movies manually by typing the title below.<br>Go <a href="/list.jsp">here</a> to see information about the movies added!</p>
-        <p>
-          <form action="/enqueue" method="post">
-            <input type="text" name="movie">
-            <input type="submit">
-          </form>
+        <h1>About</h1>
+        <p class="lead">
+          This website allows the user to get information about movies based on IMDB, using the <a href="http://www.omdbapi.com/">Open Movie Database API</a>. The user could either search for a movie that gets added to the <a href="/list.jsp">list</a> of movies, or go to the <a href="/filter.jsp">filter page</a> to filter movies on the <a href="http://www.imdb.com/chart/top">IMDB Top 250 list</a>.
+
         </p>
       </div>
 
