@@ -56,7 +56,7 @@ public class Enqueue extends HttpServlet {
         	getMovieInfo(movie_info);
 	        Queue queue = QueueFactory.getDefaultQueue();     
 	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster));
-	        response.sendRedirect("/list");
+	        response.sendRedirect("/list.jsp");
         }
         else
         	response.sendRedirect("/");
