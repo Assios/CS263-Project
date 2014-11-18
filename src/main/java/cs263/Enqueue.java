@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.common.reflect.TypeToken;
@@ -32,6 +38,8 @@ public class Enqueue extends HttpServlet {
     String plot = null;
     String rating = null;
     String poster = null;
+    String imdbID = "hi";
+    boolean duplicate = false;
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,15 +59,31 @@ public class Enqueue extends HttpServlet {
     	
         System.out.println(movie_info.get("Title"));
         
-        // Add the task to the default queue.        
+        // Add the task to the default queue.
+        
+        DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+        
+        Query q = new Query("Movie");
+        PreparedQuery pq = ds.prepare(q);
+        
         if (movie_info.get("Response").equals("True")) {
         	getMovieInfo(movie_info);
+        	
+            for (Entity result : pq.asIterable()) {
+                Key key = result.getKey();
+                String id = (String) result.getProperty("imdbID");
+                if (id.equals(imdbID)) {
+                	duplicate = true;
+                }
+            }
+            
+            if (!duplicate) {
 	        Queue queue = QueueFactory.getDefaultQueue();     
-	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster));
-	        response.sendRedirect("/list.jsp");
+	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID",  imdbID));
+            }
+            
+            response.sendRedirect("/list.jsp");
         }
-        else
-        	response.sendRedirect("/");
     }
     
     private void getMovieInfo(HashMap<String,String> map) {
@@ -70,6 +94,7 @@ public class Enqueue extends HttpServlet {
     	this.plot = map.get("Plot");
     	this.rating = map.get("imdbRating");
     	this.poster = map.get("Poster");
+    	this.imdbID = map.get("imdbID");
     }
     
 }

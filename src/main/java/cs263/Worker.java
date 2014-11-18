@@ -13,6 +13,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Query;
 
 // The Worker servlet should be mapped to the "/worker" URL.
 public class Worker extends HttpServlet {
@@ -25,8 +26,8 @@ public class Worker extends HttpServlet {
         String plot = request.getParameter("plot");
         String rating = request.getParameter("rating");
         String poster_url = request.getParameter("poster");
-  
-        
+        String imdbID = request.getParameter("imdbID");
+
         Date date = new Date();
 
         Key movieKey = KeyFactory.createKey("Movie", title);
@@ -39,8 +40,10 @@ public class Worker extends HttpServlet {
         movie.setProperty("plot", plot);
         movie.setProperty("rating", rating);
         movie.setProperty("poster", poster_url);
+        movie.setProperty("imdbID", imdbID);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        
         datastore.put(movie);
     }
 }
