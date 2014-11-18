@@ -21,6 +21,8 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
 
+//Only used for testing, now using .jsp file instead
+
 public class ListMovies extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,6 +34,8 @@ public class ListMovies extends HttpServlet {
     	
     	Query q = new Query("Movie");
     	PreparedQuery pq = ds.prepare(q);
+
+        write.print("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"\"><meta name=\"author\" content=\"\"><link rel=\"icon\" href=\"favicon.ico\"><title>Movies</title><link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"><link href=\"css/main.css\" rel=\"stylesheet\"></head><body><div class=\"container\"><div class=\"header\"><ul class=\"nav nav-pills pull-right\"><li class=\"active\"><a href=\"/\">Home</a></li><li class=\"active\"><a href=\"/filter\">Filter movies</a></li><li class=\"active\"><a href=\"#\">About</a></li></ul><h3 class=\"text-muted\">Movies</h3></div>");
     	
     	write.print("<p>List of movies:</p>");
     	
@@ -44,5 +48,7 @@ public class ListMovies extends HttpServlet {
     		write.print("<p><a href=\"" + poster + "\">" + title + "</a> from " + year + " has a score of " + rating + " on IMDB.</p>");
 
     	}
+
+        write.print("<div class=\"footer\"><p>&copy; Movies</p> </div></div></body></html>");
     }
 }

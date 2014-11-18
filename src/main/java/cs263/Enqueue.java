@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -55,7 +56,7 @@ public class Enqueue extends HttpServlet {
         	getMovieInfo(movie_info);
 	        Queue queue = QueueFactory.getDefaultQueue();     
 	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster));
-	        response.sendRedirect("/");
+	        response.sendRedirect("/list");
         }
         else
         	response.sendRedirect("/");
