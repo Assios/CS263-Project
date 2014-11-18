@@ -38,7 +38,7 @@ public class Enqueue extends HttpServlet {
     String plot = null;
     String rating = null;
     String poster = null;
-    String imdbID = "hi";
+    String imdbID = null;
     boolean duplicate = false;
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
