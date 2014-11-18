@@ -67,6 +67,7 @@ public class Enqueue extends HttpServlet {
         PreparedQuery pq = ds.prepare(q);
         
         if (movie_info.get("Response").equals("True")) {
+        	duplicate = false;
         	getMovieInfo(movie_info);
         	
             for (Entity result : pq.asIterable()) {
@@ -78,12 +79,17 @@ public class Enqueue extends HttpServlet {
             }
             
             if (!duplicate) {
-	        Queue queue = QueueFactory.getDefaultQueue();     
-	        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID",  imdbID));
+		        Queue queue = QueueFactory.getDefaultQueue();     
+		        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID",  imdbID));
             }
             
             response.sendRedirect("/list.jsp");
         }
+        
+        else {
+        	response.sendRedirect("/404.html");
+        }
+        
     }
     
     private void getMovieInfo(HashMap<String,String> map) {
