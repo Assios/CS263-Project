@@ -1,6 +1,5 @@
 package cs263;
 
-// The Enqueue servlet should be mapped to the "/enqueue" URL.
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -22,7 +21,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
 
-public class ReadData extends HttpServlet {
+public class ListMovies extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
