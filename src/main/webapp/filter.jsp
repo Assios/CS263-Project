@@ -39,9 +39,31 @@
         <h3 class="text-muted">Movies</h3>
       </div>
 
-      <h2>Filter movies in the IMDB Top 250 list below.<br>You will get a list of movies that matches your criteria.</h2>
+      <h3>Filter movies below.<br>You will get a list of movies from the IMDB Top 250 list that matches your criteria.</h3>
 
-      
+    <form action="/enqueuef" class="navbar-form" role="search" method="post">
+      <div class="input-group">
+        <span class="input-group-addon">Min year</span>
+        <input type="text" name="minyear" class="form-control" placeholder="1950">
+      </div>
+      <br><br>
+      <div class="input-group">
+        <span class="input-group-addon">Max year</span>
+        <input type="text" name="maxyear"  class="form-control" placeholder="2014">
+      </div>
+      <br><br>
+      <div class="input-group">
+        <span class="input-group-addon">Genre</span>
+        <input type="text" name="genre" class="form-control" placeholder="Action">
+      </div>
+      <br><br>
+      <div class="input-group">
+        <span class="input-group-addon">Directed by</span>
+        <input type="text" name="director" class="form-control" placeholder="Hitchcock">
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 
       <div class="footer">
         <p>&copy; Movies</p>

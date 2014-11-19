@@ -34,6 +34,27 @@
         <url-pattern>/worker</url-pattern>
     </servlet-mapping>
     
+    <!--  Enqueue filter -->
+    <servlet>
+        <servlet-name>enqueuef</servlet-name>
+        <servlet-class>cs263.Enqueuef</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>enqueuef</servlet-name>
+        <url-pattern>/enqueuef</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>workerf</servlet-name>
+        <servlet-class>cs263.Workerf</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>workerf</servlet-name>
+        <url-pattern>/workerf</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>cs263.MyServlet</servlet-class>
