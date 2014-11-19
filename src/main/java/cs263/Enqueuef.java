@@ -50,6 +50,17 @@ public class Enqueuef extends HttpServlet {
         Query q = new Query("Top250");
         PreparedQuery pq = ds.prepare(q);
       
+        for (Entity result : pq.asIterable()) {
+            Key key = result.getKey();
+            String year = (String) result.getProperty("year");
+            String q_genre = (String) result.getProperty("genre");
+            String q_director = (String) result.getProperty("director");
+
+            if (q_director.toLowerCase().contains(director.toLowerCase())) {
+            	System.out.println(q_director + " MATCHES " + director);
+
+            }
+        }
         
     }
     
