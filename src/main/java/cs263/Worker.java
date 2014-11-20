@@ -19,7 +19,7 @@ public class Worker extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String title = request.getParameter("title");
-        String year = request.getParameter("year");
+        int year = Integer.parseInt(request.getParameter("year"));
         String director = request.getParameter("director");
         String genre = request.getParameter("genre");
         String plot = request.getParameter("plot");

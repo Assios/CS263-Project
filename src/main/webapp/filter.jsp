@@ -65,6 +65,8 @@
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
 
+
+
       <div class="footer">
         <p>&copy; Movies</p>
       </div>

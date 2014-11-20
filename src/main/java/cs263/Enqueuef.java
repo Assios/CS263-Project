@@ -2,6 +2,7 @@ package cs263;
 
 // The Enqueue servlet should be mapped to the "/enqueue" URL.
 import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,6 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -33,8 +39,8 @@ public class Enqueuef extends HttpServlet {
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String min_year = request.getParameter("minyear");
-        String max_year = request.getParameter("maxyear");
+        int min_year = Integer.parseInt(request.getParameter("minyear"));
+        int max_year = Integer.parseInt(request.getParameter("maxyear"));
         String genre = request.getParameter("genre");
         String director = request.getParameter("director");
         
@@ -47,22 +53,32 @@ public class Enqueuef extends HttpServlet {
         
         DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
         
-        Query q = new Query("Top250");
+        Filter yearMinFilter =
+        		  new FilterPredicate("year",
+        		                      FilterOperator.GREATER_THAN_OR_EQUAL,
+        		                      min_year);
+        
+        Filter yearMaxFilter =
+        		  new FilterPredicate("year",
+        		                      FilterOperator.LESS_THAN_OR_EQUAL,
+        		                      max_year);
+        Filter yearRangeFilters =
+        		  CompositeFilterOperator.and(yearMinFilter, yearMaxFilter);
+        
+        Query q = new Query("Movie").setFilter(yearRangeFilters);
         PreparedQuery pq = ds.prepare(q);
-      
+        
         for (Entity result : pq.asIterable()) {
             Key key = result.getKey();
-            String year = (String) result.getProperty("year");
+            String title = (String) result.getProperty("title");
+            String year = (String) String.valueOf(result.getProperty("year"));
             String q_genre = (String) result.getProperty("genre");
             String q_director = (String) result.getProperty("director");
 
-            if (q_director.toLowerCase().contains(director.toLowerCase())) {
-            	System.out.println(q_director + " MATCHES " + director);
-
+            System.out.println(title + " from " + year);
             }
         }
         
-    }
+    } 	 	
     
-}
 
