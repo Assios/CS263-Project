@@ -44,22 +44,22 @@
     <form action="/enqueuef" class="navbar-form" role="search" method="post">
       <div class="input-group">
         <span class="input-group-addon">Min year</span>
-        <input type="text" name="minyear" class="form-control" placeholder="1950">
+        <input type="text" name="minyear" class="form-control" placeholder="0">
       </div>
       <br><br>
       <div class="input-group">
         <span class="input-group-addon">Max year</span>
-        <input type="text" name="maxyear"  class="form-control" placeholder="2014">
+        <input type="text" name="maxyear"  class="form-control" placeholder="9999">
       </div>
       <br><br>
       <div class="input-group">
         <span class="input-group-addon">Genre</span>
-        <input type="text" name="genre" class="form-control" placeholder="Action">
+        <input type="text" name="genre" class="form-control">
       </div>
       <br><br>
       <div class="input-group">
         <span class="input-group-addon">Directed by</span>
-        <input type="text" name="director" class="form-control" placeholder="Hitchcock">
+        <input type="text" name="director" class="form-control">
       </div>
       <br><br>
       <button type="submit" class="btn btn-default">Submit</button>
