@@ -30,24 +30,7 @@
 
   </head>
 
-  <%
 
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-
-if (user != null) {
-        pageContext.setAttribute("user", user);
-%>
-
-<p>Logged in as ${fn:escapeXml(user.nickname)}.)</p>
-<%
-} else {
-%>
-<p>
-    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>.</p>
-<%
-    }
-%>
   <body>
     <div class="container">
       <div class="header">
@@ -59,6 +42,28 @@ if (user != null) {
         </ul>
         <h3 class="text-muted">Movies</h3>
       </div>
+
+<%
+
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+
+if (user != null) {
+        pageContext.setAttribute("user", user);
+        
+%>
+
+<p>Logged in as ${fn:escapeXml(user.nickname)}.</p>
+<%
+} else {
+%>
+<p>
+    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>.</p>
+<%
+    }
+%>
+
+
 
       <h2>List of movies searched for by users:</h2>
 <%      
@@ -73,6 +78,7 @@ if (user != null) {
         String rating = (String) result.getProperty("rating");
         String year = (String) String.valueOf(result.getProperty("year"));
         String poster = (String) result.getProperty("poster");
+        String user = (String) result.getProperty("user");
 
 %>      <p><a href="<%= poster %>"><%= title %></a> from <%= year %> has the score <%= rating %> on IMDB.</p>
 <%

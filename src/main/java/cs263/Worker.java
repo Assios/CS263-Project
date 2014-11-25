@@ -14,6 +14,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 public class Worker extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -26,6 +29,8 @@ public class Worker extends HttpServlet {
         String rating = request.getParameter("rating");
         String poster_url = request.getParameter("poster");
         String imdbID = request.getParameter("imdbID");
+        String user = request.getParameter("user");
+     
 
         Date date = new Date();
 
@@ -40,6 +45,7 @@ public class Worker extends HttpServlet {
         movie.setProperty("rating", rating);
         movie.setProperty("poster", poster_url);
         movie.setProperty("imdbID", imdbID);
+        movie.setProperty("user", user);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         

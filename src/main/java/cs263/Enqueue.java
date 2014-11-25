@@ -26,6 +26,10 @@ import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
 
@@ -40,11 +44,21 @@ public class Enqueue extends HttpServlet {
     String poster = null;
     String imdbID = null;
     boolean duplicate = false;
-	
+    String user = null;
+    	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String movie = JsonReader.swap(request.getParameter("movie"));
         String json_data = null;
+        
+        UserService userService = UserServiceFactory.getUserService();
+        User current_user = userService.getCurrentUser();
+        
+        if (current_user != null) {
+        	user = current_user.getNickname();
+        }
+        else
+        	user = "Anonymous";
         
         //Fetch data from website
         try {
@@ -81,7 +95,7 @@ public class Enqueue extends HttpServlet {
             
             if (!duplicate) {
 		        Queue queue = QueueFactory.getDefaultQueue();     
-		        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID",  imdbID));
+		        queue.add(withUrl("/worker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID",  imdbID).param("user",  user));
             }
             
             response.sendRedirect("/list.jsp");
