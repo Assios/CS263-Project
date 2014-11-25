@@ -11,7 +11,7 @@ public class MyServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        UserService userService = UserServiceFactory.getUserService();
+	        UserService userService = UserServiceFactory.getUserService();
 
         String thisURL = req.getRequestURI();
 

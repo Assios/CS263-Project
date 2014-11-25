@@ -8,6 +8,10 @@
 <%@ page import="com.google.appengine.api.taskqueue.QueueFactory" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
 <%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +30,25 @@
 
   </head>
 
-  <body>
+  <%
 
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+
+if (user != null) {
+        pageContext.setAttribute("user", user);
+%>
+
+<p>Logged in as ${fn:escapeXml(user.nickname)}.)</p>
+<%
+} else {
+%>
+<p>
+    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>.</p>
+<%
+    }
+%>
+  <body>
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
