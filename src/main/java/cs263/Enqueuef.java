@@ -98,7 +98,7 @@ public class Enqueuef extends HttpServlet {
         for (Entity result : pq.asIterable()) {
             Key key = result.getKey();
             String id = (String) result.getProperty("imdbID");
-            String rating = (String) result.getProperty("rating");
+            String rating = (String) String.valueOf(result.getProperty("rating"));
             String title = (String) result.getProperty("title");
             String year = (String) String.valueOf(result.getProperty("year"));
             String q_genre = (String) result.getProperty("genre");
@@ -108,18 +108,18 @@ public class Enqueuef extends HttpServlet {
             if (filter_genre && filter_director) {
             	if (q_genre.toLowerCase().contains(genre.toLowerCase())
             			&& q_director.toLowerCase().contains(director.toLowerCase()))
-            		write.print("<p><b>Title:</b> " + title + ". <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10. <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">OPEN ON IMDB</b></a></p>");
+            		write.print("<p><b>Title:</b> <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">" + title + "</a>. <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10.</p>");
             }
             else if (filter_genre && !(filter_director)) {
             	if (q_genre.toLowerCase().contains(genre.toLowerCase()))
-            		write.print("<p><b>Title:</b> " + title + ". <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10. <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">OPEN ON IMDB</b></a></p>");
+            		write.print("<p><b>Title:</b> <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">" + title + "</a>. <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10.</p>");
             }
             else if (!(filter_genre) && filter_director) {
             	if (q_director.toLowerCase().contains(director.toLowerCase()))
-            		write.print("<p><b>Title:</b> " + title + ". <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10. <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">OPEN ON IMDB</b></a></p>");
+            		write.print("<p><b>Title:</b> <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">" + title + "</a>. <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10.</p>");
             }
             else
-        		write.print("<p><b>Title:</b> " + title + ". <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10. <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">OPEN ON IMDB</b></a></p>");
+        		write.print("<p><b>Title:</b> <a target=\"_blank\" href=\"http://www.imdb.com/title/" + id + "\">" + title + "</a>. <b>Year:</b> " + year + ". <b>Director:</b> " + q_director + ". <b>Genre:</b> " + q_genre + ". Rating: " + rating + "/10.</p>");
             
         }
         
