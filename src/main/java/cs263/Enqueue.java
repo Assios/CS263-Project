@@ -51,6 +51,8 @@ public class Enqueue extends HttpServlet {
         String movie = URLFetch.swap(request.getParameter("movie"));
         String json_data = null;
         
+        URLFetch.addToDatastore();
+        
         UserService userService = UserServiceFactory.getUserService();
         User current_user = userService.getCurrentUser();
         
@@ -70,14 +72,12 @@ public class Enqueue extends HttpServlet {
         //CONVERT TO GSON
     	Gson gson = new Gson();     	
     	HashMap<String,String> movie_info = new Gson().fromJson(json_data, new TypeToken<HashMap<String, String>>(){}.getType());
-    	
-        System.out.println(movie_info.get("Title"));
-        
+    	        
         // Add the task to the default queue.
         
         DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
         
-        Query q = new Query("Movie");
+        Query q = new Query("Top250");
         PreparedQuery pq = ds.prepare(q);
         
         //Checks if the movie exists AND that it is a movie (we don't want TV series)
