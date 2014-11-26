@@ -73,28 +73,19 @@ if (user != null) {
 <%
 }
 %>
-
-
-
-      <h2>List of movies searched for by users:</h2>
-<%      
-      DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-      
-      Query q = new Query("Movie");
-      PreparedQuery pq = ds.prepare(q);
-      
-      for (Entity result : pq.asIterable()) {
-        Key key = result.getKey();
-        String title = (String) result.getProperty("title");
-        String rating = (String) result.getProperty("rating");
-        String year = (String) String.valueOf(result.getProperty("year"));
-        String poster = (String) result.getProperty("poster");
-        String user_name = (String) result.getProperty("user");
-
-%>      <p><a href="<%= poster %>"><%= title %></a> from <%= year %> has the score <%= rating %> on IMDB (added by user <%= user_name %>).</p>
-<%
-      }
-%>
+      <div class="jumbotron">
+        <h1>Movies</h1>
+        <p class="lead">Add movies manually by searching for a title below.<br>Go <a href="/list.jsp">here</a> to see information about the movies added!</p>
+        <p>
+          <form action="/enqueue" class="navbar-form" role="search" method="post">
+            <div class="form-group">
+              <input type="text" name="movie" class="form-control" placeholder="Search">
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </p>
+      </div>
 
       <div class="footer">
         <p>&copy; Movies</p>
