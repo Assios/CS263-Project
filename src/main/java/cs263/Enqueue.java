@@ -51,7 +51,7 @@ public class Enqueue extends HttpServlet {
         String movie = URLFetch.swap(request.getParameter("movie"));
         String json_data = null;
         
-        URLFetch.addToDatastore();
+        URLFetch.addTop250ToDatastore();
         
         UserService userService = UserServiceFactory.getUserService();
         User current_user = userService.getCurrentUser();

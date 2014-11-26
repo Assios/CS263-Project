@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+//JUST FOR TESTING LOGIN/LOGOUT
+
 public class MyServlet extends HttpServlet {
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
