@@ -102,7 +102,7 @@ public class Enqueue extends HttpServlet {
         }
         
         else {
-        	response.sendRedirect("/404.html");
+        	response.sendRedirect("/404.jsp");
         }
         
     }
