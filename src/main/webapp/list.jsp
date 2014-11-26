@@ -60,7 +60,7 @@ if (user != null) {
           <li class="active"><a href="/index.jsp">Home</a></li>
           <li class="active"><a href="/list.jsp">Movie list</a></li>
           <li class="active"><a href="/filter.jsp">Filter movies</a></li>
-          <li class="active"><a href="/about.html">About</a></li>
+          <li class="active"><a href="/about.jsp">About</a></li>
         </ul>
         <h3 class="text-muted">Movies</h3>
       </div>

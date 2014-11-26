@@ -45,6 +45,8 @@ public class Enqueuef extends HttpServlet {
         int min_year;
         int max_year;
         
+        String type = request.getParameter("datastore");
+        
         //Set lower and higher bound to 0 and 9999 if years not specified
     	if (!isNumeric(request.getParameter("minyear")))
     		min_year = 0;
@@ -63,11 +65,6 @@ public class Enqueuef extends HttpServlet {
         	filter_genre = true;
         if (!director.isEmpty())
         	filter_director = true;
-        
-        System.out.println(min_year);
-        System.out.println(max_year);
-        System.out.println(genre);
-        System.out.println(director);
 
         
     	response.setContentType("text/html");
@@ -88,10 +85,14 @@ public class Enqueuef extends HttpServlet {
         Filter yearRangeFilters =
         		  CompositeFilterOperator.and(yearMinFilter, yearMaxFilter);
         
-        Query q = new Query("Movie").setFilter(yearRangeFilters);
+        Query q = null;
+        if (type.equals("Movies added by users"))
+        	q = new Query("Movie").setFilter(yearRangeFilters);
+        else if (type.equals("IMDB Top 250 list"))
+        	q = new Query("Top250").setFilter(yearRangeFilters);
         PreparedQuery pq = ds.prepare(q);
         
-        write.print("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"\"><meta name=\"author\" content=\"\"><link rel=\"icon\" href=\"favicon.ico\"><title>Movies</title><link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"><link href=\"css/main.css\" rel=\"stylesheet\"></head><body><div class=\"container\"><div class=\"header\"><ul class=\"nav nav-pills pull-right\"><li class=\"active\"><a href=\"/\">Home</a></li><li class=\"active\"><a href=\"/filter.jsp\">Filter movies</a></li><li class=\"active\"><a href=\"#\">About</a></li></ul><h3 class=\"text-muted\">Movies</h3></div>");
+        write.print("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"\"><meta name=\"author\" content=\"\"><link rel=\"icon\" href=\"favicon.ico\"><title>Movies</title><link href=\"css/bootstrap.min.css\" rel=\"stylesheet\"><link href=\"css/main.css\" rel=\"stylesheet\"></head><body><div class=\"container\"><div class=\"header\"><ul class=\"nav nav-pills pull-right\"><li class=\"active\"><a href=\"/index.jsp\">Home</a></li><li class=\"active\"><a href=\"/list.jsp\">Movie list</a></li><li class=\"active\"><a href=\"/filter.jsp\">Filter movies</a></li><li class=\"active\"><a href=\"/about.jsp\">About</a></li></ul><h3 class=\"text-muted\">Movies</h3></div>");
     	
     	write.print("<p>Filtered movies:</p>");
 

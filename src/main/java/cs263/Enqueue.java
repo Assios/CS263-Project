@@ -48,7 +48,7 @@ public class Enqueue extends HttpServlet {
     	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String movie = JsonReader.swap(request.getParameter("movie"));
+        String movie = URLFetch.swap(request.getParameter("movie"));
         String json_data = null;
         
         UserService userService = UserServiceFactory.getUserService();
@@ -62,7 +62,7 @@ public class Enqueue extends HttpServlet {
         
         //Fetch data from website
         try {
-			json_data = JsonReader.readUrl("http://www.omdbapi.com/?t=" + movie);
+			json_data = URLFetch.readUrl("http://www.omdbapi.com/?t=" + movie);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

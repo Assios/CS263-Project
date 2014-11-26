@@ -74,45 +74,19 @@ if (user != null) {
 }
 %>
 
-      <h3>Filter movies below.<br>You will get a list of movies from the IMDB Top 250 list that matches your criteria.</h3>
+      <div class="jumbotron">
+        <h1>About</h1>
+        <p class="lead">
+          This website allows the user to get information about movies, using the <a href="http://www.omdbapi.com/">Open Movie Database API</a>. The user could search for a movie that gets added to the <a href="/list.jsp">list</a> of movies, or go to the <a href="/filter.jsp">filter page</a> to filter movies on either the user list or the <a href="http://www.imdb.com/chart/top">IMDB Top 250 list</a>.
 
-    <form action="/enqueuef" class="navbar-form" role="search" method="post">
-      Choose which datastore you want movies from: <select class="form-control" id="sel1" name="datastore">
-            <option>Movies added by users</option>
-            <option>IMDB Top 250 list</option>
-      </select>
-      <br><br>
-      <div class="input-group">
-        <span class="input-group-addon">Min year</span>
-        <input type="text" name="minyear" class="form-control" placeholder="0">
+        </p>
       </div>
-      <br><br>
-      <div class="input-group">
-        <span class="input-group-addon">Max year</span>
-        <input type="text" name="maxyear"  class="form-control" placeholder="9999">
-      </div>
-      <br><br>
-      <div class="input-group">
-        <span class="input-group-addon">Genre</span>
-        <input type="text" name="genre" class="form-control">
-      </div>
-      <br><br>
-      <div class="input-group">
-        <span class="input-group-addon">Directed by</span>
-        <input type="text" name="director" class="form-control">
-      </div>
-      <br><br>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-
-
 
       <div class="footer">
         <p>&copy; Movies</p>
       </div>
 
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
   </body>
 </html>

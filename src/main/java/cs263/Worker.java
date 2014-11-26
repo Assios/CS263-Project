@@ -42,13 +42,13 @@ public class Worker extends HttpServlet {
         movie.setProperty("director", director);
         movie.setProperty("genre", genre);
         movie.setProperty("plot", plot);
-        movie.setProperty("rating", rating);
         movie.setProperty("poster", poster_url);
         movie.setProperty("imdbID", imdbID);
         movie.setProperty("user", user);
+        movie.setProperty("rating", rating);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        
+
         datastore.put(movie);
     }
 }

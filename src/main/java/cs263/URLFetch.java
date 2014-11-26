@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class JsonReader {
-	
+public class URLFetch {
+	//Fetches data from URL
 	static String swap(String url) {
 		//Swap whitespace with "%20" so that the URL works
 		String[] array = url.split("");
