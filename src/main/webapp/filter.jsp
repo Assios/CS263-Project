@@ -74,7 +74,7 @@ if (user != null) {
 }
 %>
 
-      <h3>Filter movies below.<br>You will get a list of movies from the IMDB Top 250 list that matches your criteria.</h3>
+      <h3>Filter movies below.<br>You will get a list of movies from either the IMDB Top 250 list or the user list that matches your criteria.</h3>
 
     <form action="/enqueuef" class="navbar-form" role="search" method="post">
       Choose which datastore you want movies from: <select class="form-control" id="sel1" name="datastore">
