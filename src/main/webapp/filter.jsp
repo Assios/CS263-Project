@@ -78,8 +78,8 @@ if (user != null) {
 
     <form action="/enqueuef" class="navbar-form" role="search" method="post">
       Choose which datastore you want movies from: <select class="form-control" id="sel1" name="datastore">
-            <option>Movies added by users</option>
             <option>IMDB Top 250 list</option>
+            <option>Movies added by users</option>
       </select>
       <br><br>
       <div class="input-group">

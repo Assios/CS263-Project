@@ -51,7 +51,7 @@ public class Enqueue extends HttpServlet {
         String movie = URLFetch.swap(request.getParameter("movie"));
         String json_data = null;
         
-        URLFetch.addTop250ToDatastore();
+        //URLFetch.addTop250ToDatastore(); (Only used once when adding the top250 movies to the datastore)
         
         UserService userService = UserServiceFactory.getUserService();
         User current_user = userService.getCurrentUser();
@@ -77,7 +77,7 @@ public class Enqueue extends HttpServlet {
         
         DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
         
-        Query q = new Query("Top250");
+        Query q = new Query("Movie");
         PreparedQuery pq = ds.prepare(q);
         
         //Checks if the movie exists AND that it is a movie (we don't want TV series)
