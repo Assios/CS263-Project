@@ -90,8 +90,9 @@ if (user != null) {
         String year = (String) String.valueOf(result.getProperty("year"));
         String poster = (String) result.getProperty("poster");
         String user_name = (String) result.getProperty("user");
+        String imdbID = (String) result.getProperty("imdbID");
 
-%>      <p><a href="<%= poster %>"><%= title %></a> from <%= year %> has the score <%= rating %> on IMDB (added by user <%= user_name %>).</p>
+%>      <p><a href="http://www.imdb.com/title/<%= imdbID %>"><%= title %></a> from <%= year %> has the score <%= rating %> on IMDB (added by user <%= user_name %>).</p>
 <%
       }
 %>
