@@ -77,7 +77,7 @@ if (user != null) {
         <h1>Movies</h1>
         <p class="lead">Add movies manually by searching for a title below.<br>Go <a href="/list.jsp">here</a> to see information about the movies added!</p>
         <p>
-          <form action="/enqueue" class="navbar-form" role="search" method="post">
+          <form action="/addmovie" class="navbar-form" role="search" method="post">
             <div class="form-group">
               <input type="text" name="movie" class="form-control" placeholder="Search">
             </div>
