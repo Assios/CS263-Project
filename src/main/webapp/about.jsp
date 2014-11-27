@@ -77,7 +77,7 @@ if (user != null) {
       <div class="jumbotron">
         <h1>About</h1>
         <p class="lead">
-          This website allows the user to get information about movies, using the <a href="http://www.omdbapi.com/">Open Movie Database API</a>. The user could search for a movie that gets added to the <a href="/list.jsp">list</a> of movies, or go to the <a href="/filter.jsp">filter page</a> to filter movies on either the user list or the <a href="http://www.imdb.com/chart/top">IMDB Top 250 list</a>.
+          This website allows the user to get information about movies, using the <a href="http://www.omdbapi.com/">Open Movie Database API</a>. The user could search for a movie that gets added to the <a href="/list.jsp">public list</a> of movies, or go to the <a href="/filter.jsp">filter page</a> to filter movies on either the user list or the <a href="http://www.imdb.com/chart/top">IMDB Top 250 list</a>.
 
         </p>
       </div>

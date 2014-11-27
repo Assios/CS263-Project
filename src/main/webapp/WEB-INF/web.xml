@@ -13,46 +13,36 @@
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
 
-    <!--  Enqueue -->
+    <!--  AddMovieServlet -->
     <servlet>
-        <servlet-name>enqueue</servlet-name>
-        <servlet-class>cs263.Enqueue</servlet-class>
+        <servlet-name>AddMovieServlet</servlet-name>
+        <servlet-class>cs263.AddMovieServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>enqueue</servlet-name>
-        <url-pattern>/enqueue</url-pattern>
+        <servlet-name>AddMovieServlet</servlet-name>
+        <url-pattern>/addmovie</url-pattern>
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>worker</servlet-name>
-        <servlet-class>cs263.Worker</servlet-class>
+        <servlet-name>AddMovieWorker</servlet-name>
+        <servlet-class>cs263.AddMovieWorker</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>worker</servlet-name>
-        <url-pattern>/worker</url-pattern>
+        <servlet-name>AddMovieWorker</servlet-name>
+        <url-pattern>/addmovieworker</url-pattern>
     </servlet-mapping>
     
     <!--  Enqueue filter -->
     <servlet>
-        <servlet-name>enqueuef</servlet-name>
-        <servlet-class>cs263.Enqueuef</servlet-class>
+        <servlet-name>FilterMovieServlet</servlet-name>
+        <servlet-class>cs263.FilterMovieServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>enqueuef</servlet-name>
-        <url-pattern>/enqueuef</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>workerf</servlet-name>
-        <servlet-class>cs263.Workerf</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>workerf</servlet-name>
-        <url-pattern>/workerf</url-pattern>
+        <servlet-name>FilterMovieServlet</servlet-name>
+        <url-pattern>/filtermovie</url-pattern>
     </servlet-mapping>
     
     <servlet>
