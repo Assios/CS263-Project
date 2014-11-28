@@ -34,7 +34,7 @@
         <url-pattern>/addmovieworker</url-pattern>
     </servlet-mapping>
     
-    <!--  Enqueue filter -->
+    <!--  Filter movie Servlet -->
     <servlet>
         <servlet-name>FilterMovieServlet</servlet-name>
         <servlet-class>cs263.FilterMovieServlet</servlet-class>
@@ -44,6 +44,28 @@
         <servlet-name>FilterMovieServlet</servlet-name>
         <url-pattern>/filtermovie</url-pattern>
     </servlet-mapping>
+    
+    <!--  Blobstore -->
+    
+        <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>cs263.Upload</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>	
+
+    <servlet>
+        <servlet-name>Serve</servlet-name>
+        <servlet-class>cs263.Serve</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Serve</servlet-name>
+        <url-pattern>/serve</url-pattern>
+    </servlet-mapping>	
     
     <servlet>
         <servlet-name>login</servlet-name>
