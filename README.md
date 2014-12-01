@@ -6,6 +6,5 @@ You could for example get a list of all the thriller movies on IMDB's Top 250 li
 
 ### TODO
 
-1. Add ability to provide an imdb.com url to automatically add all movies on the page to the user list. There are many <a href="http://www.imdb.com/features/anniversary/2010/lists/">lists</a> on imdb.com, and the user should have the ability to add movies from whichever list he wants by just providing the url.
-2. Let the user upload pictures through blobstore, and use the <a href="https://cloud.google.com/appengine/docs/java/images/">Images API</a>.
-3. Memcache.
+1. Let the user upload pictures through blobstore, and use the <a href="https://cloud.google.com/appengine/docs/java/images/">Images API</a>.
+2. Memcache.
