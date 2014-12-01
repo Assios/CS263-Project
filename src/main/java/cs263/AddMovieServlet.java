@@ -62,47 +62,57 @@ public class AddMovieServlet extends HttpServlet {
 		if (current_user != null) {
 			user = current_user.getNickname();
 		} else user = "Anonymous";
-
-		//Fetch data from website
-		try {
-			json_data = URLFetch.readUrl("http://www.omdbapi.com/?t=" + movie);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		
+		if (movie.toLowerCase().contains("imdb.com/")) {
+			try {
+			URLFetch.addTo("Movie", movie);
+			} catch (Exception e2) {
+				response.sendRedirect("/list.jsp");
+			}
 		}
-
-		//Converts JSON to HashMap through Gson
-		Gson gson = new Gson();
-		HashMap < String, String > movie_info = new Gson().fromJson(json_data, new TypeToken < HashMap < String, String >> () {}.getType());
-
-		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-
-		Query q = new Query("Movie");
-		PreparedQuery pq = ds.prepare(q);
-
-		//Checks if the movie exists AND that it is a movie (we don't want TV series)
-		if ((movie_info.get("Response").equals("True")) && (movie_info.get("Type").equals("movie"))) {
-			duplicate = false;
-			getMovieInfo(movie_info);
-
-			for (Entity result: pq.asIterable()) {
-				Key key = result.getKey();
-				String id = (String) result.getProperty("imdbID");
-				if (id.equals(imdbID)) {
-					duplicate = true;
+		else {
+			//Fetch data from website
+			try {
+				json_data = URLFetch.readUrl("http://www.omdbapi.com/?t=" + movie);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+	
+			//Converts JSON to HashMap through Gson
+			Gson gson = new Gson();
+			HashMap < String, String > movie_info = new Gson().fromJson(json_data, new TypeToken < HashMap < String, String >> () {}.getType());
+	
+			DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+	
+			Query q = new Query("Movie");
+			PreparedQuery pq = ds.prepare(q);
+	
+			//Checks if the movie exists AND that it is a movie (we don't want TV series)
+			if ((movie_info.get("Response").equals("True")) && (movie_info.get("Type").equals("movie"))) {
+				duplicate = false;
+				getMovieInfo(movie_info);
+	
+				for (Entity result: pq.asIterable()) {
+					Key key = result.getKey();
+					String id = (String) result.getProperty("imdbID");
+					if (id.equals(imdbID)) {
+						duplicate = true;
+					}
 				}
+	
+				if (!duplicate) {
+					Queue queue = QueueFactory.getDefaultQueue();
+					queue.add(withUrl("/addmovieworker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID", imdbID).param("user", user));
+				}
+	
+				response.sendRedirect("/list.jsp");
+			} else {
+				response.sendRedirect("/404.jsp");
 			}
-
-			if (!duplicate) {
-				Queue queue = QueueFactory.getDefaultQueue();
-				queue.add(withUrl("/addmovieworker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID", imdbID).param("user", user));
-			}
-
-			response.sendRedirect("/list.jsp");
-		} else {
-			response.sendRedirect("/404.jsp");
 		}
 
 	}
+	
 
 	private void getMovieInfo(HashMap < String, String > map) {
 		this.title = map.get("Title");

@@ -75,7 +75,7 @@ if (user != null) {
 %>
       <div class="jumbotron">
         <h1>Movies</h1>
-        <p class="lead">Add movies manually by searching for a title below.<br>Go <a href="/list.jsp">here</a> to see information about the movies added!</p>
+        <p class="lead">Add movies manually by searching for a title below.<br>Go <a href="/list.jsp">here</a> to see information about the movies added! You can also add all movies mentioned on an IMDB page. If you want to do that, you just have to paste the url, e.g. http://www.imdb.com/list/ls000004180/, instead of typing the movie title). </p>
         <p>
           <form action="/addmovie" class="navbar-form" role="search" method="post">
             <div class="form-group">

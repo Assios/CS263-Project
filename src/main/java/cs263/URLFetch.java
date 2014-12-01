@@ -6,17 +6,30 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
@@ -58,6 +71,118 @@ public class URLFetch {
 	/**
 	 * @throws IOException
 	 */
+	
+	static void addTo(String datastore, String url) throws IOException {
+		//Adds all movies from an URL to Datastore
+		//First generate a String[] with all the ids on an URL
+		
+		HttpServletResponse resp = null;
+		
+		boolean duplicate = false;
+		String out;
+        URL website = new URL(url);
+        URLConnection connection = website.openConnection();
+        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(
+                                    connection.getInputStream()));
+
+        StringBuilder response = new StringBuilder();
+        String inputLine;
+
+        while ((inputLine = in.readLine()) != null) 
+            response.append(inputLine);
+
+        in.close();
+
+        out = response.toString();
+        
+        String[] ids = {};
+        
+        int count = 0;
+        
+        List<String> matches = new ArrayList<String>();
+		
+		Pattern p = Pattern.compile("/title/(.+?)/?ref");
+		Matcher m = p.matcher(out);
+		System.out.println("yeah");
+		while(m.find()) {
+		    matches.add(m.group(1));
+		}
+		
+		// add elements to al, including duplicates
+		HashSet hs = new HashSet();
+		hs.addAll(matches);
+		matches.clear();
+		matches.addAll(hs);
+		
+		UserService userService = UserServiceFactory.getUserService();
+		User current_user = userService.getCurrentUser();
+		
+		String title = null;
+		int year = 0;
+		int rank = 0;
+		String director = null;
+		String genre = null;
+		String rating = null;
+		String id = null;
+		String json_data = null;
+		String user = null;
+		
+		if (current_user != null) {
+			user = current_user.getNickname();
+		} else user = "Anonymous";
+		
+		for (String s : matches)  {
+			duplicate = false;
+			s = s.substring(0, 9);
+			
+			try {
+				json_data = URLFetch.readUrl("http://www.omdbapi.com/?i=" + s);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+			Gson gson = new Gson();
+			HashMap < String, String > movie_info = new Gson().fromJson(json_data, new TypeToken < HashMap < String, String >> () {}.getType());
+
+			title = movie_info.get("Title");
+			year = Integer.valueOf(movie_info.get("Year"));
+			director = movie_info.get("Director");
+			genre = movie_info.get("Genre");
+			rating = movie_info.get("imdbRating");
+			id = s;
+
+			Key movieKey = KeyFactory.createKey(datastore, title);
+			Entity movie = new Entity(datastore, movieKey);
+			movie.setProperty("title", title);
+			movie.setProperty("year", year);
+			movie.setProperty("director", director);
+			movie.setProperty("genre", genre);
+			movie.setProperty("imdbID", id);
+			movie.setProperty("rating", rating);
+			movie.setProperty("user", user);
+
+			DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+			
+			Query q = new Query("Movie");
+			PreparedQuery pq = ds.prepare(q);
+			
+			for (Entity result: pq.asIterable()) {
+				Key key = result.getKey();
+				String movie_id = (String) result.getProperty("imdbID");
+				if (movie_id.equals(id)) {
+					duplicate = true;
+				}
+			}
+
+			if (!duplicate)
+				ds.put(movie);
+		}
+		
+		System.out.println("REDIRECTING");
+		resp.sendRedirect("/list.jsp");
+	}
+
 	static void addTop250ToDatastore() throws IOException {
 		// Adds all movies from IMDB's Top 250 list
 		// To the datastore
