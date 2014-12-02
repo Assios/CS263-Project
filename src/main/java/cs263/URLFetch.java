@@ -95,21 +95,17 @@ public class URLFetch {
         in.close();
 
         out = response.toString();
-        
-        String[] ids = {};
-        
-        int count = 0;
-        
+                
         List<String> matches = new ArrayList<String>();
 		
 		Pattern p = Pattern.compile("/title/(.+?)/?ref");
 		Matcher m = p.matcher(out);
-		System.out.println("yeah");
+
 		while(m.find()) {
 		    matches.add(m.group(1));
 		}
 		
-		// add elements to al, including duplicates
+		//Remove duplicates
 		HashSet hs = new HashSet();
 		hs.addAll(matches);
 		matches.clear();
@@ -167,6 +163,9 @@ public class URLFetch {
 			Query q = new Query("Movie");
 			PreparedQuery pq = ds.prepare(q);
 			
+			// All duplicate ID's are not necessarily removed
+			// If they appear as different strings
+			// So we need to check once more
 			for (Entity result: pq.asIterable()) {
 				Key key = result.getKey();
 				String movie_id = (String) result.getProperty("imdbID");
@@ -179,7 +178,6 @@ public class URLFetch {
 				ds.put(movie);
 		}
 		
-		System.out.println("REDIRECTING");
 		resp.sendRedirect("/list.jsp");
 	}
 
