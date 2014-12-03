@@ -1,20 +1,97 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.datastore.Entity" %>
+<%@ page import="com.google.appengine.api.datastore.PreparedQuery" %>
+<%@ page import="com.google.appengine.api.datastore.Query" %>
+<%@ page import="com.google.appengine.api.taskqueue.Queue" %>
+<%@ page import="com.google.appengine.api.taskqueue.QueueFactory" %>
+<%@ page import="com.google.appengine.api.datastore.Key" %>
+<%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Movies</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active">
+            <!-- user login information -->
 <%
+
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+
+if (user != null) {
+        pageContext.setAttribute("user", user);
+        
 %>
 
+<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign out</a>
+<%
+} else {
+%>
+    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
+<%
+    }
+%>
+          <!-- user login end -->           
+          </li>
+          <li class="active"><a href="/index.jsp">Home</a></li>
+          <li class="active"><a href="/list.jsp">Movie list</a></li>
+          <li class="active"><a href="/filter.jsp">Filter movies</a></li>
+          <li class="active"><a href="/about.jsp">About</a></li>
+        </ul>
+        <h3 class="text-muted">Movies</h3>
+      </div>
 
-<html>
-    <head>
-        <title>Upload Test</title>
-    </head>
-    <body>
+<%
+if (user != null) {
+        pageContext.setAttribute("user", user);
+%>
+<p>Logged in as ${fn:escapeXml(user.nickname)}.</p>
+<%
+}
+%>
+      <div class="jumbotron">
+      <h1>Upload a movie poster</h1>
         <form action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
-            <input type="text" name="foo">
+            <input type="text" class="form-control" placeholder="Filename" name="foo"><br>
             <input type="file" name="myFile">
             <input type="submit" value="Submit">
         </form>
-    </body>
+
+      </div>
+
+      <div class="footer">
+        <p>&copy; Movies</p>
+      </div>
+
+    </div>
+
+  </body>
 </html>
