@@ -31,11 +31,12 @@ public class Upload extends HttpServlet {
 
         Map<String, BlobKey> blobs = blobstoreService.getUploadedBlobs(req);
         BlobKey blobKey = blobs.get("myFile");
-
+        String name = req.getParameter("name");
+        
         if (blobKey == null) {
             res.sendRedirect("/");
         } else {
-            res.sendRedirect("/serve?blob-key=" + blobKey.getKeyString());
+            res.sendRedirect("/serve?blob-key=" + blobKey.getKeyString() + "&name=" + name);
         }
     }
 }

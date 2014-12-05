@@ -23,7 +23,9 @@ public class Serve extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res)
         throws IOException {
-            BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
+    		String key = req.getParameter("blob-key");
+    		String name = req.getParameter("name");
+            BlobKey blobKey = new BlobKey(key);
             blobstoreService.serve(blobKey, res);
             
             //Add blob to datastore
@@ -31,13 +33,16 @@ public class Serve extends HttpServlet {
             Query q = new Query("Blobs");
     		PreparedQuery pq = ds.prepare(q);
     		
-    		Key datastoreKey = KeyFactory.createKey("Blobs", req.getParameter("blob-key"));
+    		Key datastoreKey = KeyFactory.createKey("Blobs", key);
     		Entity photo = new Entity("Blobs", datastoreKey);
     		
     		photo.setProperty("key", blobKey.getKeyString());
+    		photo.setProperty("name", name);
 
+    		if (name!=null) {
     		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
     		datastore.put(photo);
+    		}
+    		
         }
 }

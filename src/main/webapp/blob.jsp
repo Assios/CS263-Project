@@ -80,7 +80,7 @@ if (user != null) {
       <div class="jumbotron">
       <h1>Upload a movie poster</h1>
         <form action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
-            <input type="text" class="form-control" placeholder="Filename" name="foo"><br>
+            <input type="text" class="form-control" placeholder="Movie name" name="name"><br>
             <input type="file" name="myFile">
             <input type="submit" value="Submit">
         </form>

@@ -12,6 +12,15 @@
         <servlet-name>list</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>photos</servlet-name>
+        <servlet-class>cs263.ShowPhotos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>photos</servlet-name>
+        <url-pattern>/photos</url-pattern>
+    </servlet-mapping>
 
     <!--  AddMovieServlet -->
     <servlet>
