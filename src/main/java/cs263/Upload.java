@@ -33,6 +33,22 @@ public class Upload extends HttpServlet {
         BlobKey blobKey = blobs.get("myFile");
         String name = req.getParameter("name");
         
+        //Add blob to datastore
+		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+        Query q = new Query("Blobs");
+		PreparedQuery pq = ds.prepare(q);
+		String key = blobKey.getKeyString();
+		Key datastoreKey = KeyFactory.createKey("Blobs", key);
+		Entity photo = new Entity("Blobs", datastoreKey);
+		
+		photo.setProperty("key", blobKey.getKeyString());
+		photo.setProperty("name", name);
+
+		if (name!=null) {
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		datastore.put(photo);
+		}
+        
         if (blobKey == null) {
             res.sendRedirect("/");
         } else {
