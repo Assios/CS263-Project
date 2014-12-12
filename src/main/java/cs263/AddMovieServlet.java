@@ -29,7 +29,6 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
 
 /**
@@ -86,7 +85,9 @@ public class AddMovieServlet extends HttpServlet {
 	
 			Query q = new Query("Movie");
 			PreparedQuery pq = ds.prepare(q);
-	
+			
+			//TwitterPoster.Tweet("test");
+			
 			//Checks if the movie exists AND that it is a movie (we don't want TV series)
 			if ((movie_info.get("Response").equals("True")) && (movie_info.get("Type").equals("movie"))) {
 				duplicate = false;
