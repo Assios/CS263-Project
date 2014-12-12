@@ -49,6 +49,9 @@ public class AddMovieWorker extends HttpServlet {
 		movie.setProperty("imdbID", imdbID);
 		movie.setProperty("user", user);
 		movie.setProperty("rating", rating);
+		
+		//Tweet the title of the new movie that gets added
+		TwitterPoster.Tweet(title);
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 

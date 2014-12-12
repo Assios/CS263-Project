@@ -86,8 +86,6 @@ public class AddMovieServlet extends HttpServlet {
 			Query q = new Query("Movie");
 			PreparedQuery pq = ds.prepare(q);
 			
-			//TwitterPoster.Tweet("test");
-			
 			//Checks if the movie exists AND that it is a movie (we don't want TV series)
 			if ((movie_info.get("Response").equals("True")) && (movie_info.get("Type").equals("movie"))) {
 				duplicate = false;
@@ -102,6 +100,7 @@ public class AddMovieServlet extends HttpServlet {
 				}
 	
 				if (!duplicate) {
+					
 					Queue queue = QueueFactory.getDefaultQueue();
 					queue.add(withUrl("/addmovieworker").param("title", title).param("year", year).param("director", director).param("genre", genre).param("plot", plot).param("rating", rating).param("poster", poster).param("imdbID", imdbID).param("user", user));
 				}
