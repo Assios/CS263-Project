@@ -6,5 +6,4 @@ You could for example get a list of all the thriller movies on IMDB's Top 250 li
 
 ### TODO
 
-1. Let the user upload pictures through blobstore, and use the <a href="https://cloud.google.com/appengine/docs/java/images/">Images API</a>.
-2. Memcache.
+Memcache.
