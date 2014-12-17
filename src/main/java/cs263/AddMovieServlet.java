@@ -53,8 +53,6 @@ public class AddMovieServlet extends HttpServlet {
 		String movie = URLFetch.swap(request.getParameter("movie"));
 		String json_data = null;
 
-		//URLFetch.addTop250ToDatastore(); (Only used once when adding the top250 movies to the datastore)
-
 		UserService userService = UserServiceFactory.getUserService();
 		User current_user = userService.getCurrentUser();
 

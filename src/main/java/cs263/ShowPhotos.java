@@ -47,7 +47,7 @@ public class ShowPhotos extends HttpServlet {
 				continue;
 			
 			write.print("<h2>" + name + "</h2>");
-			write.print("<p><img src=\"/serve?blob-key=" + blobkey + "\"></p>");
+			write.print("<p><img src=\"/serve?blob-key=" + blobkey + "\" height=\"640\" width=\"431\"></p>");
 
 		}
 

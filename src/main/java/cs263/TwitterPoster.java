@@ -6,6 +6,10 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+/**
+ * @author Asbjørn Steinsog
+ *
+ */
 public class TwitterPoster {
 
     public static void Tweet(String title) {
@@ -14,7 +18,7 @@ public class TwitterPoster {
     	
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-          .setOAuthConsumerKey("vuTtP44fQ26Gjy6TwYmFMGcpq")
+          .setOAuthConsumerKey("Fp87dFWWgIkUG3LT0RGvr8tBx")
           .setOAuthConsumerSecret("NOT_ON_GITHUB")
           .setOAuthAccessToken("2927261215-tMlKLqlqzysPrdPgSoWMcL5vgRr7elkWtCaJ2kG")
           .setOAuthAccessTokenSecret("NOT_ON_GITHUB");
@@ -28,9 +32,5 @@ public class TwitterPoster {
             te.printStackTrace();
         }
     }
-    
-    private String ShrinkTweet(String tweet) {
-    	//TODO: Shrink movie title so that tweet <= 140 characters
-    	return tweet;
-    }
+
 }
