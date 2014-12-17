@@ -4,6 +4,3 @@ This website displays movie information based on the user's preferences. You can
 
 You could for example get a list of all the thriller movies on IMDB's Top 250 list released between 1950 and 1960 that are directed by Alfred Hitchcock (there are 6).
 
-### TODO
-
-Memcache.
