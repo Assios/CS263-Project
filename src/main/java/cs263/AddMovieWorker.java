@@ -2,6 +2,7 @@ package cs263;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,9 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.memcache.ErrorHandlers;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 /**
  * @author Asbjørn Steinskog
@@ -34,7 +38,7 @@ public class AddMovieWorker extends HttpServlet {
 		String poster_url = request.getParameter("poster");
 		String imdbID = request.getParameter("imdbID");
 		String user = request.getParameter("user");
-
+		
 		Date date = new Date();
 
 		Key movieKey = KeyFactory.createKey("Movie", title);

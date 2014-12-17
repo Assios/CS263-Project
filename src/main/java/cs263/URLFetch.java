@@ -230,7 +230,5 @@ public class URLFetch {
 
 			datastore.put(movie);
 		}
-
 	}
-
 }
